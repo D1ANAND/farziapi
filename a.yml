@@ -1,0 +1,46 @@
+cat > farziapi.yml <<EOF
+---
+version: "1.0"
+
+services:
+  web:
+    image: thedanand/farziapi:latest
+    expose:
+      - port: 8000
+        as: 8000
+        to:
+          - global: true
+    env:
+      - TEST=test
+
+profiles:
+  name: farziapi
+  duration: 1h
+  mode: fizz  
+  tier:
+    - community
+  compute:
+    web:
+      resources:
+        cpu:
+          units: 0.5
+        memory:
+          size: 1Gi
+        storage:
+          size: 1Gi
+
+placement:
+  westcoast:
+    attributes:
+      region: us-east
+    pricing:
+      web:
+        token: USDT
+        amount: 10
+
+deployment:
+  web:
+    westcoast:
+      profile: farziapi
+      count: 1
+EOF
