@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+openai-whisper
+torch  # GPU or CPU version based on your environment
+gtts
+python-multipart
